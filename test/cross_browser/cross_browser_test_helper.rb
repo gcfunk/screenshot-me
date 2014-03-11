@@ -39,7 +39,7 @@ class CrossBrowserTest < MiniTest::Unit::TestCase
     @filename ||= 0
     @filename += 1
 
-    "#{screenshot_path}/#{@filename}.png"
+    File.join screenshot_path, "#{@filename}.png"
   end
 
   def screenshot_path

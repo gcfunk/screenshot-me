@@ -19,7 +19,7 @@ namespace :test do
     @browsers = CrossBrowserHelper.expand_browsers @browsers
     current_browser = ""
     begin
-      ENV['SCREENSHOT_PATH'] = "tmp/screenshots_#{Time.new.strftime('%Y_%m_%dT%H_%M_%S')}/"
+      ENV['SCREENSHOT_PATH'] = File.join 'tmp', "screenshots_#{Time.new.strftime('%Y_%m_%dT%H_%M_%S')}"
       Parallel.map(@browsers, :in_threads => @parallel_limit) do |browser|
         current_browser = browser
         puts "Running with: #{browser.inspect}"
