@@ -12,7 +12,7 @@ namespace :test do
   @parallel_limit = @parallel_limit.to_i
 
   task :browserstacklocal do
-    sh "BrowserStackLocal -localIdentifier #{CrossBrowserTest.localIdentifier} #{ENV['BROWSERSTACK_ACCESS_KEY']} localhost,3000,0"
+    sh "BrowserStackLocal #{ENV['BROWSERSTACK_ACCESS_KEY']} localhost,3000,0"
   end
 
   task :cross_browser do

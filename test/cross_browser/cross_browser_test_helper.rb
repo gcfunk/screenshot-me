@@ -9,11 +9,6 @@ class CrossBrowserTest < MiniTest::Unit::TestCase
   BROWSERSTACK_USERNAME = ENV["BROWSERSTACK_USERNAME"]
   BROWSERSTACK_ACCESS_KEY = ENV["BROWSERSTACK_ACCESS_KEY"]
 
-  def self.localIdentifier
-    #tag test runs with directory name
-    return Dir.getwd().split('/').compact.last
-  end
-
   def setup
     if BROWSERSTACK_USERNAME == ''
       puts "Please add BROWSERSTACK_USERNAME & BROWSERSTACK_ACCESS_KEY as parameters while running rake task"
@@ -24,9 +19,7 @@ class CrossBrowserTest < MiniTest::Unit::TestCase
     CrossBrowserHelper.environment_variables.each_pair do |key, value|
       @caps[key] = ENV[value] unless ENV[value].nil?
     end
-
     @caps['browserstack.local'] = 'true'
-    @caps['browserstack.localIdentifier'] = CrossBrowserTest.localIdentifier
     @driver = Selenium::WebDriver.for(:remote,
                                       :url => url,
                                       :desired_capabilities => @caps)
