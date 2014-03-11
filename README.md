@@ -7,7 +7,7 @@ Browserstack ruby docs [https://www.browserstack.com/automate/ruby](https://www.
 1. You need an account at browserstack.com
 1. Set your environment variables
 
-		set ENV["NODES"] to the number of nodes available in 		BrowserStack to run in parallel
+		set ENV["NODES"] to the number of nodes available in BrowserStack to run in parallel
 		set ENV["BROWSERSTACK_USERNAME"] to your browserstack username
 		set ENV["BROWSERSTACK_ACCESS_KEY"] to your browserstack access key
 
