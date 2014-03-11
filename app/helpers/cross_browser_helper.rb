@@ -12,8 +12,21 @@ class CrossBrowserHelper
     browsers
   end
 
+  def self.environment_variables
+    {
+      'browser'         => 'SELENIUM_BROWSER',
+      'browser_version' => 'SELENIUM_VERSION',
+      'os'              => 'BS_AUTOMATE_OS',
+      'os_version'      => 'BS_AUTOMATE_OS_VERSION',
+      'browserName'     => 'SELENIUM_BROWSER_NAME',
+      'platform'        => 'SELENIUM_PLATFORM',
+      'device'          => 'BS_AUTOMATE_DEVICE',
+      'resolution'      => 'BS_AUTOMATE_RESOLUTION',
+    }
+  end
+
   def self.capabilities
-    ['browser', 'browser_version', 'os', 'os_version', 'browserName', 'platform', 'device', 'resolution']
+    environment_variables.keys
   end
 
   private

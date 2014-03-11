@@ -23,14 +23,9 @@ namespace :test do
       Parallel.map(@browsers, :in_threads => @parallel_limit) do |browser|
         current_browser = browser
         puts "Running with: #{browser.inspect}"
-        ENV['SELENIUM_BROWSER'] = browser['browser']
-        ENV['SELENIUM_VERSION'] = browser['browser_version']
-        ENV['BS_AUTOMATE_OS'] = browser['os']
-        ENV['BS_AUTOMATE_OS_VERSION'] = browser['os_version']
-        ENV['SELENIUM_BROWSER_NAME'] = browser['browserName']
-        ENV['SELENIUM_PLATFORM'] = browser['platform']
-        ENV['BS_AUTOMATE_DEVICE'] = browser['device']
-        ENV['BS_AUTOMATE_RESOLUTION'] = browser['resolution']
+        CrossBrowserHelper.environment_variables.each_pair do |key, value|
+          ENV[value] = browser[key]
+        end
         Dir.glob(@test_folder).each do |test_file|
           IO.popen("ruby #{test_file}") do |io|
             io.each do |line|

@@ -21,14 +21,9 @@ class CrossBrowserTest < MiniTest::Unit::TestCase
     end
     url = "http://#{BROWSERSTACK_USERNAME}:#{BROWSERSTACK_ACCESS_KEY}@hub.browserstack.com/wd/hub"
     @caps = Selenium::WebDriver::Remote::Capabilities.new
-    @caps['os'] = ENV['BS_AUTOMATE_OS'] unless ENV['BS_AUTOMATE_OS'].nil?
-    @caps['os_version'] = ENV['BS_AUTOMATE_OS_VERSION'] unless ENV['BS_AUTOMATE_OS_VERSION'].nil?
-    @caps['browser'] = ENV['SELENIUM_BROWSER'] unless ENV['SELENIUM_BROWSER'].nil?
-    @caps['browser_version'] = ENV['SELENIUM_VERSION'] unless ENV['SELENIUM_VERSION'].nil?
-    @caps['browserName'] = ENV['SELENIUM_BROWSER_NAME'] unless ENV['SELENIUM_BROWSER_NAME'].nil?
-    @caps['platform'] = ENV['SELENIUM_PLATFORM'] unless ENV['SELENIUM_PLATFORM'].nil?
-    @caps['device'] = ENV['BS_AUTOMATE_DEVICE'] unless ENV['BS_AUTOMATE_DEVICE'].nil?
-    @caps['resolution'] = ENV['BS_AUTOMATE_RESOLUTION'] unless ENV['BS_AUTOMATE_RESOLUTION'].nil?
+    CrossBrowserHelper.environment_variables.each_pair do |key, value|
+      @caps[key] = ENV[value] unless ENV[value].nil?
+    end
 
     @caps['browserstack.local'] = 'true'
     @caps['browserstack.localIdentifier'] = CrossBrowserTest.localIdentifier
