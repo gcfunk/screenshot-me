@@ -43,8 +43,8 @@ class CrossBrowserTest < MiniTest::Unit::TestCase
   end
 
   def screenshot_path
-
-    path = File.join ENV['SCREENSHOT_PATH'], CrossBrowserHelper.capabilities.map{ |cap| @caps[cap]}.join('_')
+    path = CrossBrowserHelper.capabilities.map{ |cap| @caps[cap]}.compact.join('_').squeeze('_')
+    path = File.join ENV['SCREENSHOT_PATH'], path
 
     unless File.directory?(path)
       FileUtils.mkdir_p(path)
