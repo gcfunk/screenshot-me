@@ -2,6 +2,7 @@ require 'rubygems'
 require 'minitest/autorun'
 require 'selenium-webdriver'
 require 'fileutils'
+require_relative '../../app/helpers/cross_browser_helper'
 
 class CrossBrowserTest < MiniTest::Unit::TestCase
 
@@ -54,9 +55,8 @@ class CrossBrowserTest < MiniTest::Unit::TestCase
   end
 
   def screenshot_path
-    path = ENV['SCREENSHOT_PATH'] +
-      "#{@caps['os']}_#{@caps['os_version']}_#{@caps['browser']}_#{@caps['browser_version']}_" +
-      "#{@caps['browserName']}_#{@caps['platform']}_#{@caps['device']}_#{@caps['resolution']}"
+
+    path = File.join ENV['SCREENSHOT_PATH'], CrossBrowserHelper.capabilities.map{ |cap| @caps[cap]}.join('_')
 
     unless File.directory?(path)
       FileUtils.mkdir_p(path)

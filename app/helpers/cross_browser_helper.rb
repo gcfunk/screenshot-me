@@ -1,15 +1,19 @@
 class CrossBrowserHelper
 
   def self.expand_browsers(browsers)
-    ['browser', 'browser_version', 'os', 'os_version', 'browserName', 'platform', 'device', 'resolution'].each do |attr|
+    capabilities.each do |attr|
       expanded_browsers = []
       browsers.each do |browser_set|
-        expanded_browsers += CrossBrowserHelper.expand_browser_set(browser_set, attr)
+        expanded_browsers += expand_browser_set(browser_set, attr)
       end
       browsers = expanded_browsers
     end
 
     browsers
+  end
+
+  def self.capabilities
+    ['browser', 'browser_version', 'os', 'os_version', 'browserName', 'platform', 'device', 'resolution']
   end
 
   private
