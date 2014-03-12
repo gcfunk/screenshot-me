@@ -19,14 +19,14 @@ class CrossBrowserTest < MiniTest::Unit::TestCase
     CrossBrowserHelper.environment_variables.each_pair do |key, value|
       @caps[key] = ENV[value] unless ENV[value].nil?
     end
-    @caps['browserstack.local'] = 'true'
+    @caps['browserstack.local'] = ENV['BS_LOCAL']
     @driver = Selenium::WebDriver.for(:remote,
                                       :url => url,
                                       :desired_capabilities => @caps)
   end
 
   def teardown
-    @driver.quit
+    @driver.quit if @driver
   end
 
   def save_screenshot

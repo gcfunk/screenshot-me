@@ -23,6 +23,12 @@ Browserstack ruby docs [https://www.browserstack.com/automate/ruby](https://www.
 
 ### Usage
 
+The rake task test:cross_browser takes the following arguments
+
+* local ( true|false, optional, default true) - tell browserstack to use local testing mode - localhost:3000 will resolve to your machine
+
+To test a local site
+
 		# In project you want to test
 		$ rails s
 		...in a separate terminal...
@@ -30,7 +36,15 @@ Browserstack ruby docs [https://www.browserstack.com/automate/ruby](https://www.
 		$ rake test:browserstacklocal
 		...in a separate terminal...
 		# In screenshot-me
-		$ rake test:cross_browser
+		$ rake test:cross_browser[true]
+		
+To test a publicly availiable site
+
+		# In screenshot-me
+		$ rake test:browserstacklocal
+		...in a separate terminal...
+		# In screenshot-me
+		$ rake test:cross_browser[false]
 
 Screenshots are saved to tmp/screenshots_*
 

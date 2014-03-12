@@ -15,7 +15,8 @@ namespace :test do
     sh "BrowserStackLocal #{ENV['BROWSERSTACK_ACCESS_KEY']} localhost,3000,0"
   end
 
-  task :cross_browser do
+  task :cross_browser, :local do |t, args|
+    ENV['BS_LOCAL'] = args[:local] || true
     @browsers = CrossBrowserHelper.expand_browsers @browsers
     current_browser = ""
     begin
