@@ -6,7 +6,7 @@ require_relative '../../app/helpers/cross_browser_helper'
 
 namespace :test do
 
-  @browsers = JSON.load(open('test/cross_browser/browsers.json'))
+  @browsers = JSON.load(open('test/cross_browser/example_browsers.json'))
   @test_folder = "test/cross_browser/*_test.rb"
   @parallel_limit = ENV["nodes"] || 1
   @parallel_limit = @parallel_limit.to_i

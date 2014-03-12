@@ -1,0 +1,24 @@
+[
+    {
+        "browser": "firefox",
+        "browser_version": ["27.0","26.0","25.0"],
+        "os": "Windows",
+        "os_version": ["7", "8",  "8.1"]
+    },
+    {
+        "browser": "Safari",
+        "browser_version": "7.0",
+        "os": "OS X",
+        "os_version": "Mavericks"
+    },
+    {
+        "browserName": "iPhone",
+        "platform": "MAC",
+        "device": "iPhone 5"
+    },
+    {
+        "browserName": "android",
+        "platform": "ANDROID",
+        "device": "Samsung Galaxy S III"
+    }
+]
