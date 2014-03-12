@@ -6,16 +6,16 @@ require_relative '../../app/helpers/cross_browser_helper'
 
 namespace :test do
 
-  @test_folder = "test/cross_browser/*_test.rb"
   @parallel_limit = (ENV["nodes"] || 1).to_i
 
   task :browserstacklocal do
     sh "BrowserStackLocal #{ENV['BROWSERSTACK_ACCESS_KEY']} localhost,3000,0"
   end
 
-  task :cross_browser, :browsers_file, :local do |t, args|
-    ENV['BS_LOCAL'] = args[:local] || true
+  task :cross_browser, :test_file, :browsers_file, :local do |t, args|
+    test_file = args[:test_file] || 'test/cross_browser/example_test.rb'
     browsers_file = args[:browsers_file] || 'test/cross_browser/example_browsers.json'
+    ENV['BS_LOCAL'] = args[:local] || true
     @browsers = CrossBrowserHelper.expand_browsers JSON.load(open(browsers_file))
     current_browser = ""
     begin
@@ -26,11 +26,9 @@ namespace :test do
         CrossBrowserHelper.environment_variables.each_pair do |key, value|
           ENV[value] = browser[key]
         end
-        Dir.glob(@test_folder).each do |test_file|
-          IO.popen("ruby #{test_file}") do |io|
-            io.each do |line|
-              puts line
-            end
+        IO.popen("ruby #{test_file}") do |io|
+          io.each do |line|
+            puts line
           end
         end
       end
