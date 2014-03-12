@@ -6,8 +6,6 @@ require_relative '../../app/helpers/cross_browser_helper'
 
 namespace :test do
 
-  @parallel_limit = (ENV["nodes"] || 1).to_i
-
   task :browserstacklocal do
     sh "BrowserStackLocal #{ENV['BROWSERSTACK_ACCESS_KEY']} localhost,3000,0"
   end
@@ -16,11 +14,12 @@ namespace :test do
     test_file = args[:test_file] || 'test/cross_browser/example_test.rb'
     browsers_file = args[:browsers_file] || 'test/cross_browser/example_browsers.json'
     ENV['BS_LOCAL'] = args[:local] || true
-    @browsers = CrossBrowserHelper.expand_browsers JSON.load(open(browsers_file))
+    parallel_limit = (ENV["nodes"] || 1).to_i
+    browsers = CrossBrowserHelper.expand_browsers JSON.load(open(browsers_file))
     current_browser = ""
     begin
       ENV['SCREENSHOT_PATH'] = File.join 'tmp', "screenshots_#{Time.new.strftime('%Y_%m_%dT%H_%M_%S')}"
-      Parallel.map(@browsers, :in_threads => @parallel_limit) do |browser|
+      Parallel.map(browsers, :in_threads => parallel_limit) do |browser|
         current_browser = browser
         puts "Running with: #{browser.inspect}"
         CrossBrowserHelper.environment_variables.each_pair do |key, value|
