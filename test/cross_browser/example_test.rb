@@ -1,13 +1,14 @@
 require_relative 'cross_browser_test_helper'
 
-class IlikaiTest < CrossBrowserTest
+class ExampleTest < CrossBrowserTest
 
-  def test_post
-    root_path = 'http://localhost:3000/'
+  def test_pages
+    root_path = 'https://github.com/'
     pages = [
         '',
-        'pages/about-the-ilikai',
-        'pages/residences'
+        'explore',
+        'features',
+        'blog'
     ]
 
     pages.each do |page|
