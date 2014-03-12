@@ -16,6 +16,7 @@ Browserstack ruby docs [https://www.browserstack.com/automate/ruby](https://www.
 		export BROWSERSTACK_USERNAME=...
 		export BROWSERSTACK_ACCESS_KEY=...
 		$ source ~/.bash_profile (or restart terminal)
+		
 1. Download and unzip command line interface tool from [http://www.browserstack.com/local-testing#command-line](http://www.browserstack.com/local-testing#command-line)
 1. Move it to /usr/local/bin so it can be accessed from a rake task
 
@@ -25,9 +26,10 @@ Browserstack ruby docs [https://www.browserstack.com/automate/ruby](https://www.
 
 The rake task test:cross_browser takes the following arguments
 
-* local ( true|false, optional, default true) - tell browserstack to use local testing mode - localhost:3000 will resolve to your machine
+* browser_file (path/to/file.json, default test/cross_browser/example_browsers.json) - a json file that contains the browser set you would like to use to test
+* local ( true|false, default true) - tell browserstack to use local testing mode - localhost:3000 will resolve to your machine
 
-To test a local site
+To test a local site (note passing local=true)
 
 		# In project you want to test
 		$ rails s
@@ -36,15 +38,15 @@ To test a local site
 		$ rake test:browserstacklocal
 		...in a separate terminal...
 		# In screenshot-me
-		$ rake test:cross_browser[true]
+		$ rake test:cross_browser[path/to/file.json,true]
 		
-To test a publicly availiable site
+To test a publicly availiable site (note passing local=false)
 
 		# In screenshot-me
 		$ rake test:browserstacklocal
 		...in a separate terminal...
 		# In screenshot-me
-		$ rake test:cross_browser[false]
+		$ rake test:cross_browser[path/to/file.json,false]
 
 Screenshots are saved to tmp/screenshots_*
 

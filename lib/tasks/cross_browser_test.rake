@@ -6,18 +6,17 @@ require_relative '../../app/helpers/cross_browser_helper'
 
 namespace :test do
 
-  @browsers = JSON.load(open('test/cross_browser/example_browsers.json'))
   @test_folder = "test/cross_browser/*_test.rb"
-  @parallel_limit = ENV["nodes"] || 1
-  @parallel_limit = @parallel_limit.to_i
+  @parallel_limit = (ENV["nodes"] || 1).to_i
 
   task :browserstacklocal do
     sh "BrowserStackLocal #{ENV['BROWSERSTACK_ACCESS_KEY']} localhost,3000,0"
   end
 
-  task :cross_browser, :local do |t, args|
+  task :cross_browser, :browsers_file, :local do |t, args|
     ENV['BS_LOCAL'] = args[:local] || true
-    @browsers = CrossBrowserHelper.expand_browsers @browsers
+    browsers_file = args[:browsers_file] || 'test/cross_browser/example_browsers.json'
+    @browsers = CrossBrowserHelper.expand_browsers JSON.load(open(browsers_file))
     current_browser = ""
     begin
       ENV['SCREENSHOT_PATH'] = File.join 'tmp', "screenshots_#{Time.new.strftime('%Y_%m_%dT%H_%M_%S')}"
