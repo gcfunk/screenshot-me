@@ -55,6 +55,16 @@ To delete all screenshots from tmp/
 
 		$ rake test:delete_screenshots
 
+### Writing a test
+
+1. Copy and rename example_test.rb and example_browsers.json
+1. If you moved them to a different directory, adjust the path to cross_browser_test_helper at the top.
+1. Any method that starts with 'test_' will be run because CrossBrowserTest inherits from MiniTest::Unit::TestCase
+1. Write selenium code!
+
+If you call `save_screenshot(filename)` instead of `driver.save_screenshot("screenshots.png")` it will save it in the tmp\directory in a folder that contains the other screenshots taken during this test run on the same browser.
+
+
 ### Selecting the browsers you wish to test
 
 [http://www.browserstack.com/automate/ruby#setting-os-and-browser](http://www.browserstack.com/automate/ruby#setting-os-and-browser)
