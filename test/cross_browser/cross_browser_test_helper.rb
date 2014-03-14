@@ -24,6 +24,7 @@ class CrossBrowserTest < MiniTest::Unit::TestCase
     @driver = Selenium::WebDriver.for(:remote,
                                       :url => url,
                                       :desired_capabilities => @caps)
+    @driver.manage.window.maximize
   end
 
   def teardown
