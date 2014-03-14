@@ -14,14 +14,15 @@ class CrossBrowserHelper
 
   def self.environment_variables
     {
-      'browser'         => 'SELENIUM_BROWSER',
-      'browser_version' => 'SELENIUM_VERSION',
-      'os'              => 'BS_AUTOMATE_OS',
-      'os_version'      => 'BS_AUTOMATE_OS_VERSION',
-      'browserName'     => 'SELENIUM_BROWSER_NAME',
-      'platform'        => 'SELENIUM_PLATFORM',
-      'device'          => 'BS_AUTOMATE_DEVICE',
-      'resolution'      => 'BS_AUTOMATE_RESOLUTION',
+      'browser'           => 'SELENIUM_BROWSER',
+      'browser_version'   => 'SELENIUM_VERSION',
+      'os'                => 'BS_AUTOMATE_OS',
+      'os_version'        => 'BS_AUTOMATE_OS_VERSION',
+      'browserName'       => 'SELENIUM_BROWSER_NAME',
+      'platform'          => 'SELENIUM_PLATFORM',
+      'device'            => 'BS_AUTOMATE_DEVICE',
+      'resolution'        => 'BS_AUTOMATE_RESOLUTION',
+      'deviceOrientation' => 'BS_DEVICE_ORIENTATION',
     }
   end
 
