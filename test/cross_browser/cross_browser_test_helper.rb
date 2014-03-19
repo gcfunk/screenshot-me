@@ -32,8 +32,17 @@ class CrossBrowserTest < MiniTest::Unit::TestCase
   end
 
   def save_screenshot(filename = 'screenshot')
+    wait_for_ajax
     filename = 'screenshot' if filename == ''
     @driver.save_screenshot screenshot_filename(filename)
+  end
+
+  def wait_for_ajax(timeout=60, increment=2) # timeout and increment in seconds
+    timespan = 0
+    while timespan < timeout && @driver.execute_script("return jQuery.active != 0")
+      sleep increment
+      timespan += increment
+    end
   end
 
   private
