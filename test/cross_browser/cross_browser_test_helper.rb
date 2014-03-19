@@ -39,7 +39,7 @@ class CrossBrowserTest < MiniTest::Unit::TestCase
 
   def wait_for_ajax(timeout=60, increment=2) # timeout and increment in seconds
     timespan = 0
-    while timespan < timeout && @driver.execute_script("return jQuery.active != 0")
+    while timespan < timeout && @driver.execute_script("return window.jQuery && jQuery.active != 0")
       sleep increment
       timespan += increment
     end
